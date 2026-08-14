@@ -69,3 +69,13 @@ client.on("message", async (channel, tags, message, self) => {
 client.on("connected", () => {
   console.log(`Bot connected to ${process.env.TWITCH_CHANNEL}`);
 });
+
+// Keep Render alive – start a tiny HTTP server
+const http = require("http");
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end("R6 Bot is running!");
+});
+server.listen(8080, () => {
+  console.log("HTTP server running on port 8080");
+});
