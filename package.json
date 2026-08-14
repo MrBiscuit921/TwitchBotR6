@@ -1,0 +1,29 @@
+{
+  "name": "r6apitwitchbot",
+  "version": "1.0.0",
+  "description": "twitchbot for psyconame",
+  "main": "twitchBot.cjs",
+  "scripts": {
+    "start": "node twitchBot.cjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrBiscuit921/TwitchBotR6.git"
+  },
+  "keywords": [
+    "r6",
+    "api"
+  ],
+  "author": "mrbiscuit921",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrBiscuit921/TwitchBotR6/issues"
+  },
+  "homepage": "https://github.com/MrBiscuit921/TwitchBotR6#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "r6-data.js": "^3.3.0",
+    "tmi.js": "^1.8.5"
+  }
+}
