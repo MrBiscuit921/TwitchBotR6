@@ -29,16 +29,7 @@ client.on("message", async (channel, tags, message, self) => {
   if (message.toLowerCase().startsWith("!stats")) {
     // Split the command: "!stats username" -> ["!stats", "username"]
     const args = message.split(" ");
-    const username = args[1] ? args[1].trim() : null;
-
-    // If no username provided, ask the user
-    if (!username) {
-      client.say(
-        channel,
-        `@${tags.username}, please specify a player name: !stats <username>`,
-      );
-      return;
-    }
+    const username = args[1]?.trim() || "PsycoName";
 
     try {
       // Call your existing function – adjust if it returns a string or object

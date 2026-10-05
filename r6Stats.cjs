@@ -42,14 +42,33 @@ function getSiegeRank(rankNum) {
   return `${tierName} ${divisionNum}`;
 }
 
+async function withRetry(fn, attempts = 3, delayMs = 1500) {
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      const status = err.response?.status;
+      const retriable =
+        status === 504 ||
+        status === 502 ||
+        status === 503 ||
+        err.code === "ECONNRESET";
+      if (!retriable || i === attempts - 1) throw err;
+      await new Promise((r) => setTimeout(r, delayMs * (i + 1)));
+    }
+  }
+}
+
 // Create an async function
 async function fetchR6Stats(username, platform = "uplay") {
   try {
-    const profile = await r6.players.getProfile({
-      nameOnPlatform: username,
-      platformType: platform,
-      platform_families: "pc",
-    });
+    const profile = await withRetry(() =>
+      r6.players.getProfile({
+        nameOnPlatform: username,
+        platformType: platform,
+        platform_families: "pc",
+      }),
+    );
 
     if (!profile.account) {
       const trackerUrl = `https://r6.tracker.network/r6siege/profile/ubi/${username}/overview`;
@@ -80,5 +99,5 @@ async function fetchR6Stats(username, platform = "uplay") {
     return null;
   }
 }
-
+fetchR6Stats("PsycoName", "uplay");
 module.exports = {fetchR6Stats};
