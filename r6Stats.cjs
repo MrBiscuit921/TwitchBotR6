@@ -87,7 +87,7 @@ async function fetchR6Stats(username, platform = "uplay") {
     const wl = (profileData.wins / profileData.losses).toFixed(2);
     const kd = (profileData.kills / profileData.deaths).toFixed(2);
 
-    const result = `${profile.player.nameOnPlatform} | S${rankedData.season_id} | Rank: ${rank} | Peak: ${peakRank} | W/L: ${wl} (${profileData.wins}/${profileData.losses}) | K/D: ${kd} (${profileData.kills}/${profileData.deaths}) | Level: ${profile.account.level}`;
+    const result = `${profile.player.nameOnPlatform} | S${rankedData.season_id} | Rank: ${rank} | Peak: ${peakRank} | W/L: ${wl} | K/D: ${kd} | Level: ${profile.account.level}`;
 
     // Keep the console logs for debugging if you want
     console.log("Fetched stats for:", username);
@@ -99,5 +99,5 @@ async function fetchR6Stats(username, platform = "uplay") {
     return null;
   }
 }
-fetchR6Stats("PsycoName", "uplay");
+
 module.exports = {fetchR6Stats};
